@@ -20,7 +20,7 @@ export interface ChatPanelProps
   id?: string
 }
 
-export function ChatPanel({
+export function InputPanel({
   id,
   isLoading,
   stop,

@@ -4,7 +4,7 @@ import { useChat, type Message } from 'ai/react'
 
 import { cn } from '@/lib/utils'
 import { ChatList } from '@/components/chat-list'
-import { ChatPanel } from '@/components/chat-panel'
+import { InputPanel } from '@/components/input-panel'
 import { EmptyScreen } from '@/components/empty-screen'
 import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
@@ -48,6 +48,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         }
       }
     })
+  console.log("Messages", messages)
   return (
     <>
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
@@ -60,15 +61,16 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           <EmptyScreen setInput={setInput} />
         )}
       </div>
-      <ChatPanel
+      <InputPanel
+        isChat={true}
         id={id}
         isLoading={isLoading}
         stop={stop}
-        append={append}
+        onSubmit={append}
         reload={reload}
         messages={messages}
         input={input}
-        setInput={setInput}
+        onChange={setInput}
       />
 
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
