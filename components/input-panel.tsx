@@ -16,7 +16,7 @@ export interface InputPanelProps {
     input: any,
     onChange: any,
     messages?: any,
-    showReload?:any
+    showReload?: any
 }
 
 export function InputPanel({
@@ -46,7 +46,7 @@ export function InputPanel({
                             Stop generating
                         </Button>
                     ) : (
-                        reload && (showReload || messages?.length ) && (
+                        reload && (showReload || messages?.length) ? (
                             <Button
                                 variant="outline"
                                 onClick={() => reload()}
@@ -55,7 +55,8 @@ export function InputPanel({
                                 <IconRefresh className="mr-2" />
                                 Regenerate response
                             </Button>
-                        )
+
+                        ):(<></>)
                     )}
                 </div>
                 <div className="space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
@@ -65,13 +66,12 @@ export function InputPanel({
                                 id,
                                 content: value,
                                 role: 'user'
-                            }: value)
+                            } : value)
                         }}
                         input={input}
                         setInput={onChange}
                         isLoading={isLoading}
                     />
-                    <FooterText className="hidden sm:block" />
                 </div>
             </div>
         </div>

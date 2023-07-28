@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
+import { backgroundGradient } from '@/components/ui/constants'
 
 export const metadata: Metadata = {
   title: {
@@ -40,6 +41,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontSans.variable,
           fontMono.variable
         )}
+        style={{
+          backgroundImage: backgroundGradient
+        }}
       >
         <Toaster />
         <Providers attribute="class" defaultTheme="light" enableSystem>

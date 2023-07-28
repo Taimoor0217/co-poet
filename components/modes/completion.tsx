@@ -41,7 +41,7 @@ const CompleteOrExplain = ({explainMode, lang}: any) => {
                         <ChatScrollAnchor trackVisibility={isLoading} />
                     </>
                 ) : (
-                    <EmptyScreen setInput={setInput} />
+                    <EmptyScreen setInput={setInput} lang={lang} isLoading={isLoading} mode={explainMode ? 'explain' : 'complete'}/>
                 )}
             </div>
             <InputPanel

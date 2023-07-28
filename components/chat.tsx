@@ -24,10 +24,11 @@ import { toast } from 'react-hot-toast'
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
-  id?: string
+  id?: string,
+  lang: string
 }
 
-export function Chat({ id, initialMessages, className }: ChatProps) {
+export function Chat({ id, initialMessages, className, lang }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
     null
@@ -46,7 +47,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         if (response.status === 401) {
           toast.error(response.statusText)
         }
-      }
+      },
+      api: `/api/${lang}/chat`
     })
   console.log("Messages", messages)
   return (
@@ -58,7 +60,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             <ChatScrollAnchor trackVisibility={isLoading} />
           </>
         ) : (
-          <EmptyScreen setInput={setInput} />
+          <EmptyScreen setInput={setInput} lang={lang} isLoading={isLoading}/>
         )}
       </div>
       <InputPanel

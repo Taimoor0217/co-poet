@@ -1,18 +1,18 @@
 export const languages = [
     {
-        title: 'English - en',
+        title: 'English',
         code: 'en'
     },
     {
-        title: 'Urdu - ur',
+        title: 'Urdu',
         code: 'ur'
     },
     {
-        title: 'Persian - fa',
+        title: 'Persian',
         code: 'fa'
     },
     {
-        title: 'Spanish - es',
+        title: 'Spanish',
         code: 'es'
     },
 ]

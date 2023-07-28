@@ -1,3 +1,4 @@
+import { Chat } from "@/components/chat";
 import Completion from "@/components/modes/completion";
 import { modes as ChatModes } from "@/lib/modes";
 import { redirect } from "next/navigation";
@@ -8,7 +9,7 @@ const Page = ({ params: { lang, mode } }: any) => {
         case ChatModes.explain.code:
             return <Completion explainMode={true} lang={lang} mode={mode} />
         case ChatModes.chat.code:
-            return <h1>Chat</h1>
+            return <Chat lang={lang} />
         default:
             redirect('/404')
             break;

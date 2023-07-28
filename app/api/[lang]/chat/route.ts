@@ -1,26 +1,32 @@
 import { StreamingTextResponse, LangChainStream, Message } from 'ai'
 import { ChatOpenAI } from 'langchain/chat_models/openai'
-import { AIMessage, HumanMessage } from 'langchain/schema'
-import { LLMChain } from "langchain/chains";
-import { completionPrompt } from '@/langchain/completion';
+import { AIMessage, HumanMessage, SystemMessage } from 'langchain/schema'
+import { getSystemMessage as BaseSystemMessage } from '@/langchain/chat'
+import { NextRequest } from 'next/server'
+import { codes } from '@/lib/languages'
 export const runtime = 'edge'
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
+  const lang : string = new URL(req.url).searchParams.get('lang') ?? 'en'
   const { messages } = await req.json()
 
   const { stream, handlers } = LangChainStream()
 
-  const model = new ChatOpenAI({temperature: 0.9, streaming: true });
-  const input = "dard uthta hai to beth jata hn"
-  const chain = new LLMChain({
-    prompt: completionPrompt(),
-    llm: model
+  const llm = new ChatOpenAI({
+    streaming: true
   })
-  chain.call({
-    language: 'urdu',
-    mood: 'romantic',
-    input
-  }, [handlers])
+
+  llm
+    .call(
+      [new SystemMessage(BaseSystemMessage(codes[lang] ?? 'en')), ...(messages as Message[]).map(m =>
+        m.role == 'user'
+          ? new HumanMessage(m.content)
+          : new AIMessage(m.content)
+      )],
+      {},
+      [handlers]
+    )
     .catch(console.error)
+
   return new StreamingTextResponse(stream)
 }
