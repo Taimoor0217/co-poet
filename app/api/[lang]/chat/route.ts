@@ -4,7 +4,7 @@ import { AIMessage, HumanMessage, SystemMessage } from 'langchain/schema'
 import { getSystemMessage as BaseSystemMessage } from '@/langchain/chat'
 import { NextRequest, NextResponse } from 'next/server'
 import { codes } from '@/lib/languages'
-import { checkUserSesssion } from '../../common'
+import { checkUserSesssion } from '@/helpers/common'
 
 export const runtime = 'edge'
 

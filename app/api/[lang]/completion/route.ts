@@ -4,7 +4,7 @@ import { LLMChain } from "langchain/chains";
 import { completionPrompt } from '@/langchain/completion';
 import { NextRequest } from 'next/server';
 import { codes } from '@/lib/languages';
-import { checkUserSesssion } from '../../common';
+import { checkUserSesssion } from '@/helpers/common';
 export const runtime = 'edge'
 
 export async function POST(req: NextRequest) {
