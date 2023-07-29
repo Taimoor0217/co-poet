@@ -1,4 +1,3 @@
-# Co-Poet
 <a href="https://co-poet.taimoor0217.com">
   <img alt="AI based poetry generator built with OpenAI" src="./assets/images/recording.gif">
   <h1 align="center">Co-Poet </h1>
