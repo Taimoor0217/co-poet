@@ -4,7 +4,7 @@ import { useChat, type Message } from 'ai/react'
 
 import { cn } from '@/lib/utils'
 import { ChatList } from '@/components/chat-list'
-import { ChatPanel } from '@/components/chat-panel'
+import { InputPanel } from '@/components/input-panel'
 import { EmptyScreen } from '@/components/empty-screen'
 import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
@@ -24,10 +24,11 @@ import { toast } from 'react-hot-toast'
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
-  id?: string
+  id?: string,
+  lang: string
 }
 
-export function Chat({ id, initialMessages, className }: ChatProps) {
+export function Chat({ id, initialMessages, className, lang }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
     null
@@ -46,8 +47,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         if (response.status === 401) {
           toast.error(response.statusText)
         }
-      }
+      },
+      api: `/api/${lang}/chat`
     })
+  console.log("Messages", messages)
   return (
     <>
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
@@ -57,18 +60,19 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             <ChatScrollAnchor trackVisibility={isLoading} />
           </>
         ) : (
-          <EmptyScreen setInput={setInput} />
+          <EmptyScreen setInput={setInput} lang={lang} isLoading={isLoading}/>
         )}
       </div>
-      <ChatPanel
+      <InputPanel
+        isChat={true}
         id={id}
         isLoading={isLoading}
         stop={stop}
-        append={append}
+        onSubmit={append}
         reload={reload}
         messages={messages}
         input={input}
-        setInput={setInput}
+        onChange={setInput}
       />
 
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>

@@ -8,13 +8,14 @@ import { cn } from '@/lib/utils'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
+import { backgroundGradient } from '@/components/ui/constants'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Next.js AI Chatbot',
-    template: `%s - Next.js AI Chatbot`
+    default: 'Co-Poet',
+    template: `%s - LLM based poetry assistant`
   },
-  description: 'An AI-powered chatbot template built with Next.js and Vercel.',
+  description: 'An AI-powered poetry assitant.',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' }
@@ -40,6 +41,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontSans.variable,
           fontMono.variable
         )}
+        style={{
+          backgroundImage: backgroundGradient
+        }}
       >
         <Toaster />
         <Providers attribute="class" defaultTheme="light" enableSystem>
