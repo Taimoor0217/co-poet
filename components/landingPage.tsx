@@ -58,7 +58,7 @@ const LandingPage = () => {
         <Subtitle variant="h4">A Collaborative Poetry Generator</Subtitle>
         <CenteredButton>
           <NextLink href="/start" passHref>
-            <StyledButton variant="contained" size="large">
+            <StyledButton>
               Get Started
             </StyledButton>
           </NextLink>

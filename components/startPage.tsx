@@ -94,7 +94,7 @@ export default function StartPage() {
                     <Grid item xs={12} sm={6}>
                         <Grid container spacing={2} direction="column">
                             {languages.map((option) => (
-                                <div onClick={() => handleLanguageChange(option.code)}>
+                                <div key={`${option.title} ${option.code}`} onClick={() => handleLanguageChange(option.code)}>
                                     <Grid item xs={12} key={option.title}>
                                         <StyledCard
                                             sx={{
